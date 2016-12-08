@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">LocalPets</string>
+    <string name="application_id">8ed5a6a2883bd0e47fe636efe4b14821</string>
+    <string name="url_photos">https://api.unsplash.com/photos/?client_id=</string>
+    <string name="url_base">http://api.petfinder.com/</string>
+    <string name="main_favorites">Favorites</string>
+    <string name="main_search">Search</string>
+    <string name="main_random">Random</string>
+    <string name="detail_favorite">Favorite</string>
+    <string name="app_label">Local Pets</string>
+    <string name="search_hint">Search</string>
+
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="clear_favorites">Clear Favorites</string>
+    <string name="clear_favorites_message">Clear favorites data?</string>
+    <string name="action_email_favorites">E-Mail Favorites List</string>
+    <string name="title_activity_search">SearchActivity</string>
+
+    <!-- search params -->
+    <string name="types_prompt">Select a type</string>
+    <string-array name="types_array">
+        <item>Any</item>
+        <item>Barnyard</item>
+        <item>Bird</item>
+        <item>Cat</item>
+        <item>Dog</item>
+        <item>Horse</item>
+        <item>Pig</item>
+        <item>Reptile</item>
+        <item>Small Furry</item>
+    </string-array>
+    <string name="breeds_prompt">Select a breed</string>
+    <string-array name="breeds_array">
+        <item>Any</item>
+    </string-array>
+    <string name="sizes_prompt">Select a size</string>
+    <string-array name="sizes_array">
+        <item>Any</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>Extra-Large</item>
+    </string-array>
+    <string name="sex_prompt">Select a Sex</string>
+    <string-array name="sex_array">
+        <item>Any</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string name="age_prompt">Select an age range</string>
+    <string-array name="age_array">
+        <item>Any</item>
+        <item>Baby</item>
+        <item>Young</item>
+        <item>Adult</item>
+        <item>Senior</item>
+    </string-array>
+</resources>
