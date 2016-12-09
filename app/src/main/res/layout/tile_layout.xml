@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:orientation="horizontal"
     android:background="#000000">
-    <com.markandersonix.localpets.SquareLayout
+    <com.markandersonix.localpets.TileLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
@@ -16,16 +16,18 @@
             android:background="#000000"
             android:id="@+id/tile_img"
             android:layout_height="match_parent" />
-    </com.markandersonix.localpets.SquareLayout>
+    </com.markandersonix.localpets.TileLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:gravity="left">
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="left"
             android:background="#000000"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
@@ -36,7 +38,7 @@
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="left"
             android:background="#000000"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
@@ -47,7 +49,7 @@
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="left"
             android:background="#000000"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
@@ -58,7 +60,7 @@
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="left"
             android:background="#000000"
             android:textColor="#FFFFFF"
             android:textStyle="bold"

@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -26,6 +27,14 @@ public class PetDetailActivity extends AppCompatActivity {
     Pet pet;
     Bundle bundle;
     @BindView(R.id.detail_image) ImageView detailImage;
+    @BindView(R.id.detail_name) TextView detailName;
+    @BindView(R.id.detail_type) TextView detailType;
+    @BindView(R.id.detail_breed) TextView detailBreed;
+    @BindView(R.id.detail_sex) TextView detailSex;
+    @BindView(R.id.detail_age) TextView detailAge;
+    @BindView(R.id.detail_location) TextView detailLocation;
+    @BindView(R.id.detail_email) TextView detailEmail;
+
     boolean cropped;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +53,13 @@ public class PetDetailActivity extends AppCompatActivity {
             Picasso.with(this).load(large).centerInside()
                     .resize(size.x,size.y)
                     .into(detailImage);
+            detailName.setText(pet.getName().get$t());
+            detailType.setText(pet.getAnimal().get$t());
+            detailBreed.setText(pet.getBreeds().toString());
+            detailSex.setText(pet.getSex().get$t());
+            detailAge.setText(pet.getAge().get$t());
+            detailLocation.setText(pet.getContact().getCity().get$t());
+            detailEmail.setText(pet.getContact().getEmail().get$t());
         }
 
         detailImage.setOnClickListener(new View.OnClickListener() {
@@ -86,8 +102,8 @@ public class PetDetailActivity extends AppCompatActivity {
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             //create ContentValues to add row to db
             ContentValues values = new ContentValues();
-            values.put(FavoritesContract.FavoriteEntry.COLUMN_NAME_URL, pet.getMedia().getPhotos().getPhoto().get(1).get$t());
-            Toast.makeText(this, "Url saved to favorites.", Toast.LENGTH_LONG).show();
+            values.put(FavoritesContract.FavoriteEntry.COLUMN_NAME_URL, pet.getId().get$t());
+            Toast.makeText(this, "Listing saved to favorites.", Toast.LENGTH_LONG).show();
             //insert, returns primary key
             long newRowId = db.insert(FavoritesContract.FavoriteEntry.TABLE_NAME, null, values);
         }

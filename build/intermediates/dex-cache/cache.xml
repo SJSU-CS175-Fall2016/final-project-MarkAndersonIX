@@ -106,7 +106,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="af85b8d763d9f13a7a6bf7a942f99f29c62340ea">
+        sha1="531fa4813bff69e5233d524be6c49328b0c99701">
         <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_1f70a4b2f1d67f4d72fccd6b5f9af2f610b621b4\classes.dex" />
     </item>
     <item
@@ -151,7 +151,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="d59217521a54a42162a81433edf10ce935d74403">
+        sha1="b9bcf043cefaecffc2986c74bb8d2e568d4affea">
         <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_b4157c42c3592ac579c7b1f53e686b6283c403e5\classes.dex" />
     </item>
     <item

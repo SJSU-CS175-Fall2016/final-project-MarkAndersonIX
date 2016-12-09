@@ -5,15 +5,12 @@ package com.markandersonix.localpets.Models.Favorites;
  */
 
 public class Favorite {
-    private String url;
-    private int index;
-
-    public String getUrl() {
-        return url;
+    public String getId() {
+        return id;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getIndex() {
@@ -23,4 +20,8 @@ public class Favorite {
     public void setIndex(int index) {
         this.index = index;
     }
+
+    private String id;
+    private int index;
+
 }

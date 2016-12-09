@@ -1,5 +1,6 @@
 package com.markandersonix.localpets;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import com.markandersonix.localpets.Models.Search.Pet;
 import com.markandersonix.localpets.Models.Search.SearchData;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindString;
@@ -35,13 +37,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.pet_recycler_view) RecyclerView petRecyclerView;
+    @BindString(R.string.application_id) String application_id;
+    @BindString(R.string.url_base) String url_base;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     ArrayList<Pet> pets;
-
-    @BindString(R.string.application_id) String application_id;
-    @BindString(R.string.url_base) String url_base;
-
+    HashMap<String,String> nullmap;
+    final int SEARCH_REQUEST = 1;
     int randPageNumber = 1;
 
     @Override
@@ -50,12 +52,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         pets = new ArrayList<>();
+        nullmap = new HashMap<>(); //pass to getListings for zero option request
+        nullmap.put("location","95117");
         if(savedInstanceState != null && savedInstanceState.containsKey("pets")){
             pets.addAll( (ArrayList) savedInstanceState.getSerializable("pets"));
             attachRecyclerAdapter();
         }else {
-            getPets();
+            getPets(nullmap);
         }
+        petRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        petRecyclerView.setLayoutManager(mLayoutManager);
+
         //load favorites database
         SQLiteDatabase db = new FavoritesDbHelper(this).getWritableDatabase();
         //db.execSQL(FavoritesDbHelper.getSqlDeleteEntries());
@@ -69,11 +77,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         if(Intent.ACTION_SEARCH.equals(intent.getAction()) &&
                 intent.hasExtra("query")) {
-            getPets(); //intent.getStringExtra("query"), 1);
+            getPets(nullmap); //intent.getStringExtra("query"), 1);
         }else {
-            getPets();
+            getPets(nullmap);
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == SEARCH_REQUEST){
+            if(resultCode == Activity.RESULT_OK){
+                HashMap<String,String> options = (HashMap<String,String>)data.getExtras().getSerializable("options");
+                Log.e("onActivityResult:",options.values().toString());
+                getPets(options);
+            }
+        }
+    }
+
     //Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,14 +114,14 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(this,"Search",Toast.LENGTH_SHORT).show();
             //onSearchRequested();
             Intent intent = new Intent(this, SearchActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, SEARCH_REQUEST);
         }
         if(item.getItemId() == R.id.main_random){
             randPageNumber++;
             //Toast.makeText(this, "Page: "+randPageNumber, Toast.LENGTH_SHORT).show();
-            if(!getPets()){
+            if(!getPets(nullmap)){
                 randPageNumber = 1;
-                getPets();
+                getPets(nullmap);
             }
         }
         return super.onOptionsItemSelected(item);
@@ -111,33 +132,51 @@ public class MainActivity extends AppCompatActivity {
         outState.putSerializable("pets", pets);
     }
 
-    protected boolean getPets(){
+    protected boolean getPets(HashMap<String,String> options){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url_base)
                 .addConverterFactory(customConverterWithBreedDeserializer()) //add modified factory to handle PetFinder API..
                 .build();
         PetFinderService service = retrofit.create(PetFinderService.class);
-        Call<SearchData> data = service.getListings("95117");
+        //location is required, default to San Jose zipcode.
+        if(!options.containsKey("location")){
+            options.put("location","95117");
+        }
+        Log.e("options:",options.values().toString());
+//        Call<SearchData> data = service.getListings(
+//                options.get("type"),
+//                options.get("breed"),
+//                options.get("sex"),
+//                options.get("size"),
+//                options.get("age"),
+//                options.get("zipcode")
+//        );
+        Call<SearchData> data = service.getListings(options);
         boolean success = true;
         try {
             data.enqueue(new Callback<SearchData>() {
                 @Override
                 public void onResponse(Call<SearchData> call, Response<SearchData> response) {
+                    pets.clear();
                     SearchData searchData = response.body();
                     Log.e("data:",searchData.toString());
-                    List<Pet> petResults = searchData.getPetfinder().getPets().getPet();
-                    for(Pet petResult: petResults){
-                        pets.add(petResult);
-                        Log.e("Pet: ", petResult.getName().get$t());
+                    try {
+                        List<Pet> petResults = searchData.getPetfinder().getPets().getPet();
+                        for (Pet petResult : petResults) {
+                            pets.add(petResult);
+                            Log.e("Pet: ", petResult.getName().get$t());
+                        }
+                        for (Pet p : pets) {
+                            Log.e("Pet: ", p.getName().get$t());
+                        }
+                        mAdapter = new PetAdapter(getApplicationContext(), pets);
+                        petRecyclerView.setAdapter(mAdapter);
+                    }catch(Exception e){
+                        Log.e("onResponse:",e.getMessage());
+                        pets.clear();
+                        mAdapter = new PetAdapter(getApplicationContext(), pets);
+                        petRecyclerView.setAdapter(mAdapter);
                     }
-                    for(Pet p : pets){
-                        Log.e("Pet: ", p.getName().get$t());
-                    }
-                    petRecyclerView.setHasFixedSize(true);
-                    mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-                    petRecyclerView.setLayoutManager(mLayoutManager);
-                    mAdapter = new PetAdapter(getApplicationContext(), pets);
-                    petRecyclerView.setAdapter(mAdapter);
                 }
 
                 @Override
@@ -151,13 +190,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return success;
     }
-    protected void attachRecyclerAdapter(){
-        petRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
-        petRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new PetAdapter(getApplicationContext(), pets);
-        petRecyclerView.setAdapter(mAdapter);
-    }
     //creates a ConverterFactory which handles the abiguous case for PetFinder API breed response.
     private GsonConverterFactory customConverterWithBreedDeserializer(){
         GsonBuilder gsonBuilder = new GsonBuilder();
@@ -165,4 +197,12 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = gsonBuilder.create();
         return GsonConverterFactory.create(gson);
     }
+    protected void attachRecyclerAdapter(){
+        petRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        petRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new PetAdapter(getApplicationContext(), pets);
+        petRecyclerView.setAdapter(mAdapter);
+    }
+
 }

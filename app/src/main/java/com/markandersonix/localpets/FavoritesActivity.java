@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class FavoritesActivity extends AppCompatActivity {
-    ArrayList<String> urls;
+    ArrayList<String> ids;
 
     @BindView(R.id.favorites_recycler_view) RecyclerView favoritesRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -33,7 +33,7 @@ public class FavoritesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_favorites);
         ButterKnife.bind(this);
         //String[] projection = {FavoritesContract.FavoriteEntry.COLUMN_NAME_URL};
-        urls = new ArrayList<>();
+        ids = new ArrayList<>();
         FavoritesDbHelper dbHelper = new FavoritesDbHelper(this);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.query(
@@ -47,18 +47,18 @@ public class FavoritesActivity extends AppCompatActivity {
         c.moveToFirst();
         if(c != null && c.getCount() > 0) {
             do{
-                urls.add(c.getString(1));
+                ids.add(c.getString(1));
             }while(c.moveToNext());
         }else{
-            urls = new ArrayList<>();
+            //
         }
 
         favoritesRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         favoritesRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new FavoriteAdapter(this, urls);
+        mAdapter = new FavoriteAdapter(this, ids);
         favoritesRecyclerView.setAdapter(mAdapter);
-        //Toast.makeText(this, urls.toString(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, ids.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -80,7 +80,7 @@ public class FavoritesActivity extends AppCompatActivity {
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
                     db.execSQL(FavoritesDbHelper.getSqlDeleteEntries());
                     db.execSQL(FavoritesDbHelper.getSqlCreateEntries());
-                    urls.clear();
+                    ids.clear();
                     mAdapter.notifyDataSetChanged();
 
                 }

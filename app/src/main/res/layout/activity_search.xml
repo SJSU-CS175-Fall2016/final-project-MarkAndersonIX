@@ -66,11 +66,13 @@
             android:layout_weight="1">
             <CheckBox
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:id="@+id/zip_checkbox"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
+                android:id="@+id/zip_edittext"
                 android:maxLength="5"/>
 
         </LinearLayout>
