@@ -56,7 +56,7 @@ public class PetDetailActivity extends AppCompatActivity {
         final Point size = new Point();
         display.getSize(size);
         cropped = false;
-
+        //initialize the information fields using bundle data
         if(bundle != null) {
             pet = (Pet) bundle.getSerializable("pet");
             String large = pet.getMedia().getPhotos().getPhoto().get(2).get$t();
@@ -66,7 +66,7 @@ public class PetDetailActivity extends AppCompatActivity {
             detailName.setText("Name: " + pet.getName().get$t());
             detailType.setText("Type: " + pet.getAnimal().get$t());
             detailBreed.setText("Breed: " + pet.getBreeds().toString());
-            detailSex.setText("Sex: " + pet.getSex().get$t() == "M"?"Male":"Female");
+            detailSex.setText(pet.getSex().get$t() == "M"?"Sex: Male":"Sex: Female");
             detailAge.setText("Age: " + pet.getAge().get$t());
             String address = pet.getContact().getAddress1().get$t() != null?
                     pet.getContact().getAddress1().get$t()+", ": " ";
@@ -78,11 +78,11 @@ public class PetDetailActivity extends AppCompatActivity {
             detailEmail.setText("Email: " + pet.getContact().getEmail().get$t());
             detailDescription.setText("\nAbout: " + pet.getDescription().get$t());
         }
-
+        //add click listener to image to toggle between zoom levels.
         detailImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(pet != null) {
+                if(pet.getMedia().getPhotos().getPhoto().get(2).get$t() != null) {
                     String large = pet.getMedia().getPhotos().getPhoto().get(2).get$t();
                     if(cropped) {
                         Picasso.with(getApplicationContext()).load(large)
@@ -91,9 +91,6 @@ public class PetDetailActivity extends AppCompatActivity {
                                 .into(detailImage);
                         cropped = false;
                     }else{
-//                        Toast.makeText(getApplicationContext(), Integer.toString(detailImage.getWidth())+" "
-//                                +Integer.toString(detailImage.getHeight()),
-//                                Toast.LENGTH_LONG).show();
                         Picasso.with(getApplicationContext()).load(large)
                                 .resize(detailImage.getWidth(),detailImage.getHeight())
                                 .centerCrop()
@@ -102,53 +99,67 @@ public class PetDetailActivity extends AppCompatActivity {
                     }
             }
         }});
-        detailEmailButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(pet.getContact().getEmail() != null){
-                    Intent mailIntent = new Intent(Intent.ACTION_SENDTO);
-                    mailIntent.setData(Uri.parse("mailto:")); // only email apps should handle this
-                    mailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{pet.getContact().getEmail().get$t()});
-                    mailIntent.putExtra(Intent.EXTRA_SUBJECT, "LocalPets App: I'm Interested in adopting a pet!");
-                    mailIntent.putExtra(Intent.EXTRA_TEXT,
-                            "LocalPets, matching owners with their new pets!\n"+
-                            "Name: "+pet.getName().get$t()+"\n"+
-                                    "Type: "+pet.getAnimal().get$t()+"\n");
-                    if (mailIntent.resolveActivity(getPackageManager()) != null) {
-                        startActivity(mailIntent);
+        //if email is valid, add click listener
+        if(pet.getContact().getEmail().get$t() != null) {
+            detailEmailButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (pet.getContact().getEmail().get$t() != null) {
+                        Intent mailIntent = new Intent(Intent.ACTION_SENDTO);
+                        mailIntent.setData(Uri.parse("mailto:")); // only email apps should handle this
+                        mailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{pet.getContact().getEmail().get$t()});
+                        mailIntent.putExtra(Intent.EXTRA_SUBJECT, "LocalPets App: I'm Interested in adopting a pet!");
+                        mailIntent.putExtra(Intent.EXTRA_TEXT,
+                                "LocalPets, matching owners with their new pets!\n" +
+                                        "Name: " + pet.getName().get$t() + "\n" +
+                                        "Type: " + pet.getAnimal().get$t() + "\n");
+                        if (mailIntent.resolveActivity(getPackageManager()) != null) {
+                            startActivity(mailIntent);
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Email unavailable.", Toast.LENGTH_LONG).show();
                     }
-                }else{
-                    Toast.makeText(getApplicationContext(),"Email unavailable.",Toast.LENGTH_LONG).show();
                 }
-            }
-        });
-        detailPhoneButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(pet.getContact().getPhone() != null){
-                    Uri phoneUri = Uri.parse("tel:"+pet.getContact().getPhone().get$t().replaceAll("[^\\d.]",""));
-                    Intent phoneIntent = new Intent(Intent.ACTION_DIAL, phoneUri);
-                    startActivity(phoneIntent);
-                }else{
-                    Toast.makeText(getApplicationContext(),"Phone unavailable.",Toast.LENGTH_LONG).show();
+            });
+        }else{
+            detailEmailButton.setBackgroundResource(R.mipmap.ic_email_d);
+        }
+        //if phone is valid, add click listener
+        if(pet.getContact().getPhone().get$t() != null) {
+            detailPhoneButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (pet.getContact().getPhone().get$t() != null) {
+                        Uri phoneUri = Uri.parse("tel:" + pet.getContact().getPhone().get$t().replaceAll("[^\\d.]", ""));
+                        Intent phoneIntent = new Intent(Intent.ACTION_DIAL, phoneUri);
+                        startActivity(phoneIntent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Phone unavailable.", Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
-        });
-        detailDirectionsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(pet.getContact().getAddress1() != null){
-                    Uri mapUri = Uri.parse("geo:0,0?q="+pet.getContact().getAddress1().get$t()+", "+
-                    pet.getContact().getCity().get$t().replace(" ","+")+", "+pet.getContact().getState().get$t());
-                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapUri);
-                    mapIntent.setPackage("com.google.android.apps.maps");
-                    startActivity(mapIntent);
+            });
+        }else{
+            detailPhoneButton.setBackgroundResource(R.mipmap.ic_phone_d);
+        }
+        //If address is valid, add click listener
+        if(pet.getContact().getAddress1().get$t() != null && !pet.getContact().getAddress1().get$t().contains("P.O.")) {
+            detailDirectionsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (pet.getContact().getAddress1().get$t() != null) {
+                        Uri mapUri = Uri.parse("geo:0,0?q=" + pet.getContact().getAddress1().get$t() + ", " +
+                                pet.getContact().getCity().get$t().replace(" ", "+") + ", " + pet.getContact().getState().get$t());
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapUri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        startActivity(mapIntent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Directions unavailable.", Toast.LENGTH_LONG).show();
+                    }
                 }
-                else{
-                    Toast.makeText(getApplicationContext(),"Directions unavailable.",Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+            });
+        }else{
+            detailDirectionsButton.setBackgroundResource(R.mipmap.ic_directions_d);
+        }
 
     }
 

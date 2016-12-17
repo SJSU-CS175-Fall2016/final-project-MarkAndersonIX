@@ -6,7 +6,7 @@
     android:layout_height="150dp"
     android:layout_width="match_parent"
     android:orientation="horizontal"
-    android:background="#000000">
+    android:background="@color/colorPrimaryDark">
     <com.markandersonix.localpets.TileLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_height="match_parent"
@@ -18,54 +18,69 @@
             android:layout_height="match_parent" />
     </com.markandersonix.localpets.TileLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:orientation="vertical"
-        android:gravity="left">
+        android:gravity="center"
+        android:background="@color/colorPrimaryDark">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/colorPrimary">
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/colorPrimaryDark">
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:background="#000000"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:textSize="15dp"
-            android:gravity="center_horizontal"
-            android:id="@+id/tile_name_txt" />
+            android:id="@+id/tile_name_txt"
+            android:layout_weight="1"
+            />
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:background="#000000"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:textSize="15dp"
-            android:gravity="center_horizontal"
+            android:layout_weight="1"
             android:id="@+id/tile_age_txt" />
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:background="#000000"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:textSize="15dp"
-            android:gravity="center_horizontal"
+            android:layout_weight="1"
             android:id="@+id/tile_breed_txt" />
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:background="#000000"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:textSize="15dp"
-            android:gravity="center_horizontal"
+            android:layout_weight="1"
             android:id="@+id/tile_location_txt" />
-    </LinearLayout>
+    </LinearLayout></LinearLayout></LinearLayout>
 </LinearLayout>
