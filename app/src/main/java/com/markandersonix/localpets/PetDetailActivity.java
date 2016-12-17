@@ -1,10 +1,13 @@
 package com.markandersonix.localpets;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,6 +23,8 @@ import com.markandersonix.localpets.Models.Favorites.FavoritesDbHelper;
 import com.markandersonix.localpets.Models.Search.Pet;
 import com.squareup.picasso.Picasso;
 
+import java.util.Arrays;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -33,7 +38,12 @@ public class PetDetailActivity extends AppCompatActivity {
     @BindView(R.id.detail_sex) TextView detailSex;
     @BindView(R.id.detail_age) TextView detailAge;
     @BindView(R.id.detail_location) TextView detailLocation;
+    @BindView(R.id.detail_phone) TextView detailPhone;
     @BindView(R.id.detail_email) TextView detailEmail;
+    @BindView(R.id.detail_description) TextView detailDescription;
+    @BindView(R.id.detail_email_button) TextView detailEmailButton;
+    @BindView(R.id.detail_phone_button) TextView detailPhoneButton;
+    @BindView(R.id.detail_directions_button) TextView detailDirectionsButton;
 
     boolean cropped;
     @Override
@@ -53,13 +63,20 @@ public class PetDetailActivity extends AppCompatActivity {
             Picasso.with(this).load(large).centerInside()
                     .resize(size.x,size.y)
                     .into(detailImage);
-            detailName.setText(pet.getName().get$t());
-            detailType.setText(pet.getAnimal().get$t());
-            detailBreed.setText(pet.getBreeds().toString());
-            detailSex.setText(pet.getSex().get$t());
-            detailAge.setText(pet.getAge().get$t());
-            detailLocation.setText(pet.getContact().getCity().get$t());
-            detailEmail.setText(pet.getContact().getEmail().get$t());
+            detailName.setText("Name: " + pet.getName().get$t());
+            detailType.setText("Type: " + pet.getAnimal().get$t());
+            detailBreed.setText("Breed: " + pet.getBreeds().toString());
+            detailSex.setText("Sex: " + pet.getSex().get$t() == "M"?"Male":"Female");
+            detailAge.setText("Age: " + pet.getAge().get$t());
+            String address = pet.getContact().getAddress1().get$t() != null?
+                    pet.getContact().getAddress1().get$t()+", ": " ";
+            detailLocation.setText("Address: " + address +
+                pet.getContact().getCity().get$t() + " " +
+                pet.getContact().getState().get$t());
+            String phone = pet.getContact().getPhone().get$t() != null?pet.getContact().getPhone().get$t():"Unlisted";
+            detailPhone.setText("Phone: " + phone);
+            detailEmail.setText("Email: " + pet.getContact().getEmail().get$t());
+            detailDescription.setText("\nAbout: " + pet.getDescription().get$t());
         }
 
         detailImage.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +102,54 @@ public class PetDetailActivity extends AppCompatActivity {
                     }
             }
         }});
+        detailEmailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(pet.getContact().getEmail() != null){
+                    Intent mailIntent = new Intent(Intent.ACTION_SENDTO);
+                    mailIntent.setData(Uri.parse("mailto:")); // only email apps should handle this
+                    mailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{pet.getContact().getEmail().get$t()});
+                    mailIntent.putExtra(Intent.EXTRA_SUBJECT, "LocalPets App: I'm Interested in adopting a pet!");
+                    mailIntent.putExtra(Intent.EXTRA_TEXT,
+                            "LocalPets, matching owners with their new pets!\n"+
+                            "Name: "+pet.getName().get$t()+"\n"+
+                                    "Type: "+pet.getAnimal().get$t()+"\n");
+                    if (mailIntent.resolveActivity(getPackageManager()) != null) {
+                        startActivity(mailIntent);
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(),"Email unavailable.",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        detailPhoneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(pet.getContact().getPhone() != null){
+                    Uri phoneUri = Uri.parse("tel:"+pet.getContact().getPhone().get$t().replaceAll("[^\\d.]",""));
+                    Intent phoneIntent = new Intent(Intent.ACTION_DIAL, phoneUri);
+                    startActivity(phoneIntent);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Phone unavailable.",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        detailDirectionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(pet.getContact().getAddress1() != null){
+                    Uri mapUri = Uri.parse("geo:0,0?q="+pet.getContact().getAddress1().get$t()+", "+
+                    pet.getContact().getCity().get$t().replace(" ","+")+", "+pet.getContact().getState().get$t());
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapUri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    startActivity(mapIntent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Directions unavailable.",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
     }
 
     @Override

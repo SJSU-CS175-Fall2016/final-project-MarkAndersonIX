@@ -23,6 +23,7 @@ import java.util.List;
 
 import butterknife.BindString;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,7 +37,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder>{
     private ArrayList<String> data;
     private Context context;
-    @BindString(R.string.url_base) String url_base;
     Pet pet;
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView nameText;
@@ -77,7 +77,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             public void onClick(View view) {
                 if(pet != null) {
                     Intent intent = new Intent(view.getContext(), PetDetailActivity.class);
-                    intent.putExtra("pet", pet); //<<<<Does this work?
+                    intent.putExtra("pet", pet);
                     view.getContext().startActivity(intent);
                 }
             }
@@ -101,7 +101,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     }
     protected Pet getPet(String id){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url_base)
+                .baseUrl(context.getString(R.string.url_base))
                 .addConverterFactory(customConverterWithBreedDeserializer()) //add modified factory to handle PetFinder API..
                 .build();
         PetFinderService service = retrofit.create(PetFinderService.class);

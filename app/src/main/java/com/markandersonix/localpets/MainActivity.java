@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,6 +21,8 @@ import com.markandersonix.localpets.Models.Favorites.FavoritesDbHelper;
 import com.markandersonix.localpets.Models.Search.Breed;
 import com.markandersonix.localpets.Models.Search.Breeds;
 import com.markandersonix.localpets.Models.Search.BreedsDeserializer;
+import com.markandersonix.localpets.Models.Search.Options;
+import com.markandersonix.localpets.Models.Search.OptionsDeserializer;
 import com.markandersonix.localpets.Models.Search.Pet;
 import com.markandersonix.localpets.Models.Search.SearchData;
 
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.pet_recycler_view) RecyclerView petRecyclerView;
     @BindString(R.string.application_id) String application_id;
     @BindString(R.string.url_base) String url_base;
+    @BindView(R.id.main_status) TextView mainStatus;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     ArrayList<Pet> pets;
@@ -135,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
     protected boolean getPets(HashMap<String,String> options){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url_base)
-                .addConverterFactory(customConverterWithBreedDeserializer()) //add modified factory to handle PetFinder API..
+                .addConverterFactory(customConverterWithDeserializers()) //add modified factory to handle PetFinder API..
                 .build();
         PetFinderService service = retrofit.create(PetFinderService.class);
         //location is required, default to San Jose zipcode.
@@ -143,23 +148,17 @@ public class MainActivity extends AppCompatActivity {
             options.put("location","95117");
         }
         Log.e("options:",options.values().toString());
-//        Call<SearchData> data = service.getListings(
-//                options.get("type"),
-//                options.get("breed"),
-//                options.get("sex"),
-//                options.get("size"),
-//                options.get("age"),
-//                options.get("zipcode")
-//        );
+
         Call<SearchData> data = service.getListings(options);
         boolean success = true;
         try {
             data.enqueue(new Callback<SearchData>() {
+                SearchData searchData = null;
                 @Override
                 public void onResponse(Call<SearchData> call, Response<SearchData> response) {
                     pets.clear();
-                    SearchData searchData = response.body();
-                    Log.e("data:",searchData.toString());
+                    searchData = response.body();
+                    Log.e("searchdata",searchData.toString());
                     try {
                         List<Pet> petResults = searchData.getPetfinder().getPets().getPet();
                         for (Pet petResult : petResults) {
@@ -171,17 +170,26 @@ public class MainActivity extends AppCompatActivity {
                         }
                         mAdapter = new PetAdapter(getApplicationContext(), pets);
                         petRecyclerView.setAdapter(mAdapter);
+                        mainStatus.setVisibility(View.GONE);
+                        mainStatus.setText("");
                     }catch(Exception e){
                         Log.e("onResponse:",e.getMessage());
-                        pets.clear();
-                        mAdapter = new PetAdapter(getApplicationContext(), pets);
-                        petRecyclerView.setAdapter(mAdapter);
+                        clearData();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<SearchData> call, Throwable t) {
                     Log.e("data:",t.getMessage());
+                    clearData();
+                }
+                //clear data if an error occurred
+                public void clearData(){
+                    pets.clear();
+                    mainStatus.setVisibility(View.VISIBLE);
+                    mainStatus.setText("No Results.");
+                    mAdapter = new PetAdapter(getApplicationContext(), pets);
+                    petRecyclerView.setAdapter(mAdapter);
                 }
             });
         }catch(Exception ex){
@@ -191,9 +199,10 @@ public class MainActivity extends AppCompatActivity {
         return success;
     }
     //creates a ConverterFactory which handles the abiguous case for PetFinder API breed response.
-    private GsonConverterFactory customConverterWithBreedDeserializer(){
+    private GsonConverterFactory customConverterWithDeserializers(){
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Breeds.class, new BreedsDeserializer());
+        gsonBuilder.registerTypeAdapter(Options.class, new OptionsDeserializer());
         Gson gson = gsonBuilder.create();
         return GsonConverterFactory.create(gson);
     }

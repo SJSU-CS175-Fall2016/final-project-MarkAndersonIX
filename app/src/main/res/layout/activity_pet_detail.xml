@@ -11,56 +11,116 @@
     android:paddingTop="16dp"
     tools:context="com.markandersonix.localpets.PetDetailActivity"
     android:background="@color/colorPrimaryDark">
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <com.markandersonix.localpets.SquareLayout
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageView
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:scrollbarAlwaysDrawVerticalTrack="false">
+
+            <com.markandersonix.localpets.SquareLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:srcCompat="@android:drawable/ic_menu_camera"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/detail_image" />
-        </com.markandersonix.localpets.SquareLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/detail_name"
-            android:textColor="#ffffff" android:textSize="20dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/detail_type"
-            android:textColor="#ffffff" android:textSize="20dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/detail_breed"
-            android:textColor="#ffffff" android:textSize="20dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/detail_sex"
-            android:textColor="#ffffff" android:textSize="20dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/detail_age"
-            android:textColor="#ffffff" android:textSize="20dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/detail_location"
-            android:textColor="#ffffff" android:textSize="20dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/detail_email"
-            android:textColor="#ffffff" android:textSize="20dp"/>
-    </LinearLayout>
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@android:drawable/ic_menu_camera"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/detail_image" />
+            </com.markandersonix.localpets.SquareLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_name"
+                android:textColor="#ffffff" android:textSize="20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_type"
+                android:textColor="#ffffff" android:textSize="20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_breed"
+                android:textColor="#ffffff" android:textSize="20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_sex"
+                android:textColor="#ffffff" android:textSize="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_age"
+                android:textColor="#ffffff" android:textSize="20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_location"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:linksClickable="true" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_phone"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:textStyle=""
+                android:linksClickable="true" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_email"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:textStyle=""
+                android:linksClickable="true" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="16dp">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/detail_email_button"
+                    android:layout_weight="1"
+                    android:background="@mipmap/ic_email"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/detail_phone_button"
+                    android:layout_weight="1"
+                    android:background="@mipmap/ic_phone" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/detail_directions_button"
+                    android:layout_weight="1"
+                    android:background="@mipmap/ic_directions" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_description"
+                android:textColor="#ffffff"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
 </RelativeLayout>

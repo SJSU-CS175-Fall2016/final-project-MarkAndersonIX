@@ -2,6 +2,7 @@
 package com.markandersonix.localpets.Models.Search;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,11 +16,18 @@ public class Options implements Serializable
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = -2340386023595997890L;
 
-    /**
-     * 
-     * @return
-     *     The option
-     */
+    public Options(Option ... option){
+        this.option = Arrays.asList(option);
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+        for(Option b: option){
+            result+=b.get$t().toString()+" ";
+        }
+        return result;
+    }
     public List<Option> getOption() {
         return option;
     }
@@ -31,6 +39,9 @@ public class Options implements Serializable
      */
     public void setOption(List<Option> option) {
         this.option = option;
+    }
+    public void setOption(Option option) {
+        this.option.add(option);
     }
 
     public Map<String, Object> getAdditionalProperties() {
