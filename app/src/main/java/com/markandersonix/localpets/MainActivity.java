@@ -137,14 +137,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SearchActivity.class);
             startActivityForResult(intent, SEARCH_REQUEST);
         }
-        if(item.getItemId() == R.id.main_random){
-            randPageNumber++;
-            //Toast.makeText(this, "Page: "+randPageNumber, Toast.LENGTH_SHORT).show();
-            if(!getPets(nullmap)){
-                randPageNumber = 1;
-                getPets(nullmap);
-            }
-        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -151,7 +151,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="47cf587b0237cc682d46baf926000b5e8d79aaba">
+        sha1="d48be3e249d82fbca0a79fd47aa7092267a2130e">
         <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_b4157c42c3592ac579c7b1f53e686b6283c403e5\classes.dex" />
     </item>
     <item
