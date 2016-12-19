@@ -1,8 +1,16 @@
 package com.markandersonix.localpets;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.Manifest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,11 +55,15 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_status) TextView mainStatus;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    ArrayList<Pet> pets;
-    HashMap<String,String> nullmap;
-    final int SEARCH_REQUEST = 1;
-    int randPageNumber = 1;
-    int offset = 0; //page number of query
+    private ArrayList<Pet> pets;
+    private HashMap<String,String> nullmap;
+    private final int SEARCH_REQUEST = 1;
+    private int randPageNumber = 1;
+    private int offset = 0; //page number of query
+    private final int CL_PERMISSION = 1; //coarse location permission constant
+    private static Location location;
+
+    String zipcode = "95117"; //default to San Jose
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +71,24 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         pets = new ArrayList<>();
         nullmap = new HashMap<>(); //pass to getListings for zero option request
-        nullmap.put("location","95117");
+
+        //check for location permission, get location
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},CL_PERMISSION);
+        }else{
+            Log.e("Location","Error getting permission for location services");
+        }
+        try {
+            LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+            LocationListener locationListener = getLocationListener();
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+
+        nullmap.put("location",zipcode);
         if(savedInstanceState != null && savedInstanceState.containsKey("pets")){
             pets.addAll( (ArrayList) savedInstanceState.getSerializable("pets"));
             attachRecyclerAdapter();
@@ -68,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         petRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         petRecyclerView.setLayoutManager(mLayoutManager);
-
         //load favorites database
         SQLiteDatabase db = new FavoritesDbHelper(this).getWritableDatabase();
         //db.execSQL(FavoritesDbHelper.getSqlDeleteEntries());
@@ -157,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         mAdapter = new PetAdapter(getApplicationContext(), pets);
                         petRecyclerView.setAdapter(mAdapter);
+                        petRecyclerView.setVisibility(View.VISIBLE);
                         mainStatus.setVisibility(View.GONE);
                         mainStatus.setText("");
                     }catch(Exception e){
@@ -174,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
                 public void clearData(){
                     pets.clear();
                     mainStatus.setVisibility(View.VISIBLE);
+                    petRecyclerView.setVisibility(View.GONE);
                     mainStatus.setText("No Results.");
                     mAdapter = new PetAdapter(getApplicationContext(), pets);
                     petRecyclerView.setAdapter(mAdapter);
@@ -193,12 +224,45 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = gsonBuilder.create();
         return GsonConverterFactory.create(gson);
     }
-    protected void attachRecyclerAdapter(){
+
+    protected void attachRecyclerAdapter() {
         petRecyclerView.setHasFixedSize(true);
         mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         petRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new PetAdapter(getApplicationContext(), pets);
         petRecyclerView.setAdapter(mAdapter);
+    }
+    //get location
+    public static Location getLocation(){
+        return location;
+    }
+    //setlocation
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+    //LocationListener factory
+    protected LocationListener getLocationListener(){
+        return new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                setLocation(location);
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+            }
+        };
     }
 
 }

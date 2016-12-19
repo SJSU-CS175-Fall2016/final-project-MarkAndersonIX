@@ -20,15 +20,16 @@
     <!-- search params -->
     <string name="types_prompt">Select a type</string>
     <string-array name="types_array">
+        <!--API does not produce consistent data with commented out animal types.-->
         <item>Any</item>
-        <item>Barnyard</item>
-        <item>Bird</item>
+        <!--<item>Barnyard</item>-->
+        <!--<item>Bird</item>-->
         <item>Cat</item>
         <item>Dog</item>
-        <item>Horse</item>
-        <item>Pig</item>
-        <item>Reptile</item>
-        <item>Small Furry</item>
+        <!--<item>Horse</item>-->
+        <!--<item>Pig</item>-->
+        <!--<item>Reptile</item>-->
+        <!--<item>Small Furry</item>-->
     </string-array>
     <string name="breeds_prompt">Select a breed</string>
     <string-array name="breeds_array">

@@ -2,6 +2,9 @@ package com.markandersonix.localpets;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,8 +12,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 //Petfinder class from Breeds package. API does not return consistent data.
 import com.markandersonix.localpets.Models.Breeds.Breed;
@@ -20,6 +25,7 @@ import com.markandersonix.localpets.Models.Breeds.Petfinder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -38,11 +44,12 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.age_spinner) Spinner ageSpinner;
     @BindView(R.id.zip_edittext) EditText zipEditText;
     @BindView(R.id.search_button) Button searchButton;
+    @BindView(R.id.zip_checkbox) CheckBox zipCheckBox;
     @BindString(R.string.url_base) String url_base;
     HashMap<String,String> options;
     ArrayList<String> breeds;
     ArrayAdapter<String> breedsAdapter;
-
+    String zipcode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,9 +63,34 @@ public class SearchActivity extends AppCompatActivity {
                 (this,android.R.layout.simple_spinner_dropdown_item,breeds);
         breedsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         breedSpinner.setAdapter(breedsAdapter);
-        //breedsAdapter.add("New");
-        //breedsAdapter.notifyDataSetChanged();
-        //Type item click listener to prompt update of breeds list
+
+        //get the user's zipcode using geolocation
+        Geocoder gc = new Geocoder(this, Locale.getDefault());
+        Location location = MainActivity.getLocation();
+        try {
+            List<Address> addresses = gc.getFromLocation(location.getLatitude(), location.getLongitude(),1);
+            zipcode = addresses.get(0).getPostalCode();
+        }catch(Exception ex){
+            Log.e("geocoder exception",ex.getMessage());
+        }
+        if(zipcode != null){
+            Toast.makeText(this, zipcode, Toast.LENGTH_LONG).show();
+            zipEditText.setText(zipcode);
+        }
+        //add listener to zipcheckbox
+        zipCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(zipCheckBox.isChecked()){
+                    zipEditText.setEnabled(false);
+                    zipEditText.setText(zipcode);
+                }else{
+                    zipEditText.setEnabled(true);
+                    zipEditText.setText("");
+                }
+            }
+        });
+        //add itemselectedlistener to typespinner
         typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -78,28 +110,33 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Log.e("typeSpinner:",typeSpinner.getSelectedItem().toString());
-                if(!typeSpinner.getSelectedItem().toString().equals("Any")) {
+            if (zipEditText.getText().toString().length() == 5) {
+                if (!typeSpinner.getSelectedItem().toString().equals("Any")) {
                     options.put("animal", typeSpinner.getSelectedItem().toString().toLowerCase());
                 }
-                if(!breedSpinner.getSelectedItem().toString().equals("Any")) {
+                if (!breedSpinner.getSelectedItem().toString().equals("Any")) {
                     options.put("breed", breedSpinner.getSelectedItem().toString().toLowerCase());
                 }
-                if(!sexSpinner.getSelectedItem().toString().equals("Any")) {
+                if (!sexSpinner.getSelectedItem().toString().equals("Any")) {
                     options.put("sex", sexSpinner.getSelectedItem().toString().toLowerCase());
                 }
-                if(!sizeSpinner.getSelectedItem().toString().equals("Any")) {
+                if (!sizeSpinner.getSelectedItem().toString().equals("Any")) {
                     options.put("size", sizeSpinner.getSelectedItem().toString().toLowerCase());
                 }
-                if(!ageSpinner.getSelectedItem().toString().equals("Any")) {
+                if (!ageSpinner.getSelectedItem().toString().equals("Any")) {
                     options.put("age", ageSpinner.getSelectedItem().toString().toLowerCase());
                 }
-
+                options.put("location", zipEditText.getText().toString());
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("options",options); //return map of options to main
+                resultIntent.putExtra("options", options); //return map of options to main
                 setResult(Activity.RESULT_OK, resultIntent);
                 finish();
+            }else{
+                Toast.makeText(getApplicationContext(),"Please enter a valid zipcode.",Toast.LENGTH_LONG).show();
+            }
             }
         });
+
     }//generate breed list for selected animal
     protected void getBreeds(String animal){
             Retrofit retrofit = new Retrofit.Builder()
@@ -117,8 +154,6 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<BreedData> call, Response<BreedData> response) {
                         breedData = response.body();
-                        breedsAdapter.add("getBreeds()"); //initialize with Any, then add animal breed results.
-
                         Log.e("breedData",breedData.toString());
                         try {
                             List<Breed> breedResults = breedData.getPetfinder().getBreeds().getBreed();

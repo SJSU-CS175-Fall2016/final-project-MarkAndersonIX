@@ -3,6 +3,7 @@ package com.markandersonix.localpets;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,24 +55,28 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.nameText.setText("Name: " + data.get(position).getName().get$t());
-        holder.ageText.setText("Age: " + data.get(position).getAge().get$t());
-        holder.breedText.setText("Breed: " + data.get(position).getBreeds().toString());
-        holder.locationText.setText("Location: " + data.get(position).getContact().getCity().get$t());
-        final Pet pet = data.get(position);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (pet != null) {
-                    Intent intent = new Intent(view.getContext(), PetDetailActivity.class);
-                    intent.putExtra("pet", pet); //<<<<Does this work?
-                    view.getContext().startActivity(intent);
+        try {
+            holder.nameText.setText("Name: " + data.get(position).getName().get$t());
+            holder.ageText.setText("Age: " + data.get(position).getAge().get$t());
+            holder.breedText.setText("Breed: " + data.get(position).getBreeds().toString());
+            holder.locationText.setText("Location: " + data.get(position).getContact().getCity().get$t());
+            final Pet pet = data.get(position);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (pet != null) {
+                        Intent intent = new Intent(view.getContext(), PetDetailActivity.class);
+                        intent.putExtra("pet", pet); //<<<<Does this work?
+                        view.getContext().startActivity(intent);
+                    }
                 }
-            }
-        });
-        Picasso.with(context).load(data.get(position).getMedia().getPhotos().getPhoto().get(2).get$t())
-                .resize(200, 200)//holder.imageView.getWidth(), holder.imageView.getHeight())
-                .centerCrop().into(holder.imageView);
+            });
+            Picasso.with(context).load(data.get(position).getMedia().getPhotos().getPhoto().get(2).get$t())
+                    .resize(200, 200)//holder.imageView.getWidth(), holder.imageView.getHeight())
+                    .centerCrop().into(holder.imageView);
+        }catch(Exception ex){
+            Log.e("PA BindView", ex.getMessage());
+        }
     }
 
     @Override

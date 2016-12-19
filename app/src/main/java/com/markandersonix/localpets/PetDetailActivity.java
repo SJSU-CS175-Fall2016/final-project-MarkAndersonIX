@@ -59,24 +59,28 @@ public class PetDetailActivity extends AppCompatActivity {
         //initialize the information fields using bundle data
         if(bundle != null) {
             pet = (Pet) bundle.getSerializable("pet");
-            String large = pet.getMedia().getPhotos().getPhoto().get(2).get$t();
-            Picasso.with(this).load(large).centerInside()
-                    .resize(size.x,size.y)
-                    .into(detailImage);
-            detailName.setText("Name: " + pet.getName().get$t());
-            detailType.setText("Type: " + pet.getAnimal().get$t());
-            detailBreed.setText("Breed: " + pet.getBreeds().toString());
-            detailSex.setText(pet.getSex().get$t() == "M"?"Sex: Male":"Sex: Female");
-            detailAge.setText("Age: " + pet.getAge().get$t());
-            String address = pet.getContact().getAddress1().get$t() != null?
-                    pet.getContact().getAddress1().get$t()+", ": " ";
-            detailLocation.setText("Address: " + address +
-                pet.getContact().getCity().get$t() + " " +
-                pet.getContact().getState().get$t());
-            String phone = pet.getContact().getPhone().get$t() != null?pet.getContact().getPhone().get$t():"Unlisted";
-            detailPhone.setText("Phone: " + phone);
-            detailEmail.setText("Email: " + pet.getContact().getEmail().get$t());
-            detailDescription.setText("\nAbout: " + pet.getDescription().get$t());
+            try {
+                String large = pet.getMedia().getPhotos().getPhoto().get(2).get$t();
+                Picasso.with(this).load(large).centerInside()
+                        .resize(size.x, size.y)
+                        .into(detailImage);
+                detailName.setText("Name: " + pet.getName().get$t());
+                detailType.setText("Type: " + pet.getAnimal().get$t());
+                detailBreed.setText("Breed: " + pet.getBreeds().toString());
+                detailSex.setText(pet.getSex().get$t() == "M" ? "Sex: Male" : "Sex: Female");
+                detailAge.setText("Age: " + pet.getAge().get$t());
+                String address = pet.getContact().getAddress1().get$t() != null ?
+                        pet.getContact().getAddress1().get$t() + ", " : " ";
+                detailLocation.setText("Address: " + address +
+                        pet.getContact().getCity().get$t() + " " +
+                        pet.getContact().getState().get$t());
+                String phone = pet.getContact().getPhone().get$t() != null ? pet.getContact().getPhone().get$t() : "Unlisted";
+                detailPhone.setText("Phone: " + phone);
+                detailEmail.setText("Email: " + pet.getContact().getEmail().get$t());
+                detailDescription.setText("\nAbout: " + pet.getDescription().get$t());
+            }catch(Exception ex){
+                Log.e("PDA OnCreate",ex.getMessage());
+            }
         }
         //add click listener to image to toggle between zoom levels.
         detailImage.setOnClickListener(new View.OnClickListener() {

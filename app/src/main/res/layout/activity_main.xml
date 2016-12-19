@@ -12,23 +12,28 @@
     tools:context="com.markandersonix.localpets.MainActivity">
 
     <LinearLayout
+        android:id="@+id/pet_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/pet_layout">
+        android:orientation="vertical">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/pet_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/main_status"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:text="TextView"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:text="Status"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
             android:visibility="gone" />
 
         <ImageView

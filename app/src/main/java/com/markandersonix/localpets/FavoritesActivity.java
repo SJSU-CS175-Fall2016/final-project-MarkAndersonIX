@@ -109,7 +109,7 @@ public class FavoritesActivity extends AppCompatActivity {
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
                     db.execSQL(FavoritesDbHelper.getSqlDeleteEntries());
                     db.execSQL(FavoritesDbHelper.getSqlCreateEntries());
-                    ids.clear();
+                    pets.clear();
                     mAdapter.notifyDataSetChanged();
 
                 }
