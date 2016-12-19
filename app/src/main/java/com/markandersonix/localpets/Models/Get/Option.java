@@ -1,9 +1,6 @@
 
 package com.markandersonix.localpets.Models.Get;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,22 +10,12 @@ public class Option implements Serializable
 
     private String $t;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = 4875122409622914804L;
+    private final static long serialVersionUID = 7554686918064368707L;
 
-    /**
-     * 
-     * @return
-     *     The $t
-     */
     public String get$t() {
         return $t;
     }
 
-    /**
-     * 
-     * @param $t
-     *     The $t
-     */
     public void set$t(String $t) {
         this.$t = $t;
     }
@@ -39,23 +26,6 @@ public class Option implements Serializable
 
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder().append($t).append(additionalProperties).toHashCode();
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof Option) == false) {
-            return false;
-        }
-        Option rhs = ((Option) other);
-        return new EqualsBuilder().append($t, rhs.$t).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }

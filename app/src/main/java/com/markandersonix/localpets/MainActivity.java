@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     HashMap<String,String> nullmap;
     final int SEARCH_REQUEST = 1;
     int randPageNumber = 1;
-
+    int offset = 0; //page number of query
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,19 +73,6 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = new FavoritesDbHelper(this).getWritableDatabase();
         //db.execSQL(FavoritesDbHelper.getSqlDeleteEntries());
         db.execSQL(FavoritesDbHelper.getSqlCreateEntries());
-    }
-    @Override
-    public boolean onSearchRequested() {
-        return super.onSearchRequested();
-    }
-    @Override
-    protected void onNewIntent(Intent intent) {
-        if(Intent.ACTION_SEARCH.equals(intent.getAction()) &&
-                intent.hasExtra("query")) {
-            getPets(nullmap); //intent.getStringExtra("query"), 1);
-        }else {
-            getPets(nullmap);
-        }
     }
 
     @Override

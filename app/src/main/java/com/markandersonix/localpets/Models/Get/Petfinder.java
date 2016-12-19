@@ -4,7 +4,7 @@ package com.markandersonix.localpets.Models.Get;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class Petfinder implements Serializable
 {
 
@@ -13,7 +13,7 @@ public class Petfinder implements Serializable
     private Header header;
     private String xsiNoNamespaceSchemaLocation;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = -4347472759787192896L;
+    private final static long serialVersionUID = -178183793491243015L;
 
     public Pet getPet() {
         return pet;
@@ -45,11 +45,6 @@ public class Petfinder implements Serializable
 
     public void setXsiNoNamespaceSchemaLocation(String xsiNoNamespaceSchemaLocation) {
         this.xsiNoNamespaceSchemaLocation = xsiNoNamespaceSchemaLocation;
-    }
-
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
     }
 
     public Map<String, Object> getAdditionalProperties() {

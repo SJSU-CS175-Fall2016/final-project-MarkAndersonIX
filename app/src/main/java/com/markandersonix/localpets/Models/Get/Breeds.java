@@ -1,8 +1,6 @@
 
 package com.markandersonix.localpets.Models.Get;
 
-import com.markandersonix.localpets.Models.Get.Breed;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -11,14 +9,15 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.markandersonix.localpets.Models.Get.Breed;
 
 public class Breeds implements Serializable
 {
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = 9038031747005093067L;
-	private List<Breed> breed;
+	private List<com.markandersonix.localpets.Models.Get.Breed> breed;
 
-    public Breeds(Breed... breed){
+    public Breeds(com.markandersonix.localpets.Models.Get.Breed... breed){
         this.breed = Arrays.asList(breed);
     }
     /**
@@ -26,14 +25,14 @@ public class Breeds implements Serializable
      * @return
      *     The breed
      */
-    public List<Breed> getBreed() {
+    public List<com.markandersonix.localpets.Models.Get.Breed> getBreed() {
         return breed;
     }
 
     @Override
     public String toString() {
         String result = "";
-        for(Breed b: breed){
+        for(com.markandersonix.localpets.Models.Get.Breed b: breed){
             result+=b.get$t().toString()+" ";
         }
         return result;
@@ -44,7 +43,7 @@ public class Breeds implements Serializable
      * @param breed
      *     The breed
      */
-    public void setBreed(Breed breed) {
+    public void setBreed(com.markandersonix.localpets.Models.Get.Breed breed) {
         this.breed.add(breed);
     }
     public void setBreed(List<Breed> breed) {

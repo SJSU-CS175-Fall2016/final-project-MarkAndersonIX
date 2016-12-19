@@ -7,37 +7,42 @@
     android:layout_width="match_parent"
     android:orientation="horizontal"
     android:background="@color/colorPrimaryDark">
-    <com.markandersonix.localpets.TileLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
-        <ImageView
-            android:layout_width="match_parent"
-            android:background="#000000"
-            android:id="@+id/tile_img"
-            android:layout_height="match_parent" />
-    </com.markandersonix.localpets.TileLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp">
+        <com.markandersonix.localpets.TileLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+            <ImageView
+                android:layout_width="match_parent"
+                android:background="#000000"
+                android:id="@+id/tile_img"
+                android:layout_height="match_parent" />
+        </com.markandersonix.localpets.TileLayout>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:orientation="vertical"
         android:gravity="center"
         android:background="@color/colorPrimaryDark">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp"
+            android:padding="4dp"
             android:orientation="vertical"
             android:gravity="center"
             android:background="@color/colorPrimary">
             <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp"
+            android:padding="4dp"
             android:orientation="vertical"
             android:gravity="center"
             android:background="@color/colorPrimaryDark">

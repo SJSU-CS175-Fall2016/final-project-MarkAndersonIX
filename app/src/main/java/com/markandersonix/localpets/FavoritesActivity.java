@@ -19,15 +19,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.markandersonix.localpets.Models.Favorites.FavoritesContract;
 import com.markandersonix.localpets.Models.Favorites.FavoritesDbHelper;
-import com.markandersonix.localpets.Models.Get.Pet;
-import com.markandersonix.localpets.Models.Get.Petfinder;
 import com.markandersonix.localpets.Models.Get.Breeds;
 import com.markandersonix.localpets.Models.Get.BreedsDeserializer;
+import com.markandersonix.localpets.Models.Get.GetData;
 import com.markandersonix.localpets.Models.Get.Options;
 import com.markandersonix.localpets.Models.Get.OptionsDeserializer;
+import com.markandersonix.localpets.Models.Get.Pet;
+
+//No need for deserializers in favorites so far.
+//import com.markandersonix.localpets.Models.Get.BreedsDeserializer;
+//import com.markandersonix.localpets.Models.Get.OptionsDeserializer;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -128,17 +131,17 @@ public class FavoritesActivity extends AppCompatActivity {
                 .addConverterFactory(customConverterWithDeserializers()) //add modified factory to handle PetFinder API..
                 .build();
         PetFinderService service = retrofit.create(PetFinderService.class);
-        Call<Petfinder> data = service.getPet(id);
+        Call<GetData> data = service.getPet(id);
         Log.e("getPet id", id);
         try {
-            data.enqueue(new Callback<Petfinder>() {
+            data.enqueue(new Callback<GetData>() {
                 Pet pet = null;
                 @Override
-                public void onResponse(Call<Petfinder> call, Response<Petfinder> response) {
+                public void onResponse(Call<GetData> call, Response<GetData> response) {
                     if(response.isSuccessful() && response.body() != null) {
-                        pet = response.body().getPet();
-                        pets.add(response.body().getPet());
-                        Log.e("pets length", Integer.toString(pets.size()));
+                        pet = response.body().getPetfinder().getPet();
+                        pets.add(response.body().getPetfinder().getPet());
+                        Log.e("Pet",pet.getName().get$t());
                         //Log.e("pet", response.body().toString());
                         mAdapter.notifyDataSetChanged();
                     }else{
@@ -146,7 +149,7 @@ public class FavoritesActivity extends AppCompatActivity {
                     }
                 }
                 @Override
-                public void onFailure(Call<Petfinder> call, Throwable t) {
+                public void onFailure(Call<GetData> call, Throwable t) {
                     Log.e("FA getPet() Callback", t.getMessage());
                 }
             });

@@ -1,8 +1,7 @@
 package com.markandersonix.localpets;
 
 import com.markandersonix.localpets.Models.Breeds.BreedData;
-import com.markandersonix.localpets.Models.Breeds.Breeds;
-import com.markandersonix.localpets.Models.Get.Petfinder;
+import com.markandersonix.localpets.Models.Get.GetData;
 import com.markandersonix.localpets.Models.Search.SearchData;
 
 import java.util.Map;
@@ -25,7 +24,7 @@ public interface PetFinderService {
     Call<SearchData> getListings(@Query("location") String location);
 
     @GET("pet.get?key=8ed5a6a2883bd0e47fe636efe4b14821&format=json")
-    Call<Petfinder> getPet(@Query("id") String id);
+    Call<GetData> getPet(@Query("id") String id);
 
     @GET("breed.list?key=8ed5a6a2883bd0e47fe636efe4b14821&format=json")
     Call<BreedData> getBreeds(@Query("animal") String animal);

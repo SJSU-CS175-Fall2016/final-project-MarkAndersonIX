@@ -53,7 +53,7 @@ public class SearchActivity extends AppCompatActivity {
         breeds.add("onCreate()");
         //Array adapter for dynamic breeds spinner
         breedsAdapter = new ArrayAdapter<String>
-                (this,R.layout.support_simple_spinner_dropdown_item,breeds);
+                (this,android.R.layout.simple_spinner_dropdown_item,breeds);
         breedsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         breedSpinner.setAdapter(breedsAdapter);
         //breedsAdapter.add("New");

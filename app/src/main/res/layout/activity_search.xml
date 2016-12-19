@@ -4,87 +4,154 @@
     android:id="@+id/activity_search"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.markandersonix.localpets.SearchActivity"
-    android:background="@color/colorPrimary">
+    tools:context="com.markandersonix.localpets.SearchActivity">
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/background_light">
+        android:background="@android:color/background_light"
+        android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Search"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:textSize="20dp"
-            android:text="Search"
-            android:textColor="@android:color/black"
-            android:gravity="center"/>
+            android:text="Type" />
         <Spinner
+            android:id="@+id/type_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/type_spinner"
-            android:layout_weight="1"
             android:entries="@array/types_array"
             android:prompt="@string/types_prompt" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:text="Breed" />
         <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/breed_spinner"
-            android:layout_weight="1"
-            android:prompt="@string/breeds_prompt"/>
-        <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:entries="@array/breeds_array"
+            android:prompt="@string/breeds_prompt" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:text="Size" />
+        <Spinner
             android:id="@+id/size_spinner"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:entries="@array/sizes_array"
-            android:prompt="@string/sizes_prompt"/>
+            android:prompt="@string/sizes_prompt" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:text="Sex" />
         <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/sex_spinner"
-            android:layout_weight="1"
-            android:entries="@array/sex_array"
-            android:prompt="@string/sex_prompt"/>
-        <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:entries="@array/sex_array"
+            android:prompt="@string/sex_prompt" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:text="Age" />
+        <Spinner
             android:id="@+id/age_spinner"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:entries="@array/age_array"
-            android:prompt="@string/age_prompt"/>
+            android:prompt="@string/age_prompt" />
+    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="20dp"
+                android:text="Current Zip" />
             <CheckBox
+                android:id="@+id/zip_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/zip_checkbox"/>
+                android:checked="true"/>
+
             <EditText
+                android:id="@+id/zip_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:id="@+id/zip_edittext"
-                android:maxLength="5"/>
+                android:maxLength="5"
+                android:enabled="false"/>
 
         </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="20px">
         <Button
-            android:text="Search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:id="@+id/search_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@android:color/background_light"
             android:paddingLeft="50px"
             android:paddingRight="50px"
-            android:layout_weight="1"
-            android:background="@android:color/background_light" />
+            android:text="Search" />
     </LinearLayout>
+</LinearLayout>
 </RelativeLayout>
