@@ -75,8 +75,7 @@ public class FavoritesActivity extends AppCompatActivity {
                 ids.add(c.getString(1));
                 getPet(c.getString(1));
             } while (c.moveToNext());
-            Toast.makeText(this, ids.toString(),Toast.LENGTH_LONG).show();
-            //Toast.makeText(this, pets.size(),Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, ids.toString(),Toast.LENGTH_LONG).show();
 
         } else {
             Log.e("db cursor", "Cursor is null!");

@@ -74,7 +74,6 @@ public class SearchActivity extends AppCompatActivity {
             Log.e("geocoder exception",ex.getMessage());
         }
         if(zipcode != null){
-            Toast.makeText(this, zipcode, Toast.LENGTH_LONG).show();
             zipEditText.setText(zipcode);
         }
         //add listener to zipcheckbox
