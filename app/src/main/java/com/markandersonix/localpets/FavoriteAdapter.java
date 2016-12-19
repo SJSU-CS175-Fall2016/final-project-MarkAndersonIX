@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.markandersonix.localpets.Models.Favorites.Favorite;
-import com.markandersonix.localpets.Models.Get.Pet;
+import com.markandersonix.localpets.Models.Search.Pet;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

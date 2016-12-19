@@ -19,12 +19,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.markandersonix.localpets.Models.Favorites.FavoritesContract;
 import com.markandersonix.localpets.Models.Favorites.FavoritesDbHelper;
-import com.markandersonix.localpets.Models.Get.Breeds;
-import com.markandersonix.localpets.Models.Get.BreedsDeserializer;
+import com.markandersonix.localpets.Models.Search.Breeds;
+import com.markandersonix.localpets.Models.Search.BreedsDeserializer;
 import com.markandersonix.localpets.Models.Get.GetData;
-import com.markandersonix.localpets.Models.Get.Options;
-import com.markandersonix.localpets.Models.Get.OptionsDeserializer;
-import com.markandersonix.localpets.Models.Get.Pet;
+import com.markandersonix.localpets.Models.Search.Options;
+import com.markandersonix.localpets.Models.Search.OptionsDeserializer;
+import com.markandersonix.localpets.Models.Search.Pet;
 
 //No need for deserializers in favorites so far.
 //import com.markandersonix.localpets.Models.Get.BreedsDeserializer;

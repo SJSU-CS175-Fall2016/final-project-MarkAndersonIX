@@ -4,7 +4,7 @@ package com.markandersonix.localpets.Models.Get;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
+import com.markandersonix.localpets.Models.Search.Pet;
 public class Petfinder implements Serializable
 {
 
