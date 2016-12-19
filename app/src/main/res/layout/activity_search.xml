@@ -36,7 +36,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/breed_spinner"
             android:layout_weight="1"
-            android:entries="@array/breeds_array"
             android:prompt="@string/breeds_prompt"/>
         <Spinner
             android:layout_width="match_parent"

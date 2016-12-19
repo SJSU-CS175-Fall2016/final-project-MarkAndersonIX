@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             options.put("location","95117");
         }
         Log.e("options:",options.values().toString());
-
+        //asynchronous call
         Call<SearchData> data = service.getListings(options);
         boolean success = true;
         try {
@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
         return success;
     }
     //creates a ConverterFactory which handles the abiguous case for PetFinder API breed response.
-    private GsonConverterFactory customConverterWithDeserializers(){
+    public static GsonConverterFactory customConverterWithDeserializers(){
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Breeds.class, new BreedsDeserializer());
         gsonBuilder.registerTypeAdapter(Options.class, new OptionsDeserializer());

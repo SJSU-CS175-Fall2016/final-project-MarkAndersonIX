@@ -51,7 +51,31 @@
             android:textSize="15dp"
             android:id="@+id/tile_name_txt"
             android:layout_weight="1"
-            />
+            android:fontFamily="casual" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:layout_weight="1"
+                    android:id="@+id/tile_age_txt"
+                    android:fontFamily="casual" />
+
+                <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:layout_weight="1"
+            android:id="@+id/tile_breed_txt"
+                    android:fontFamily="casual" />
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
@@ -61,26 +85,7 @@
             android:textStyle="bold"
             android:textSize="15dp"
             android:layout_weight="1"
-            android:id="@+id/tile_age_txt" />
-        <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:layout_weight="1"
-            android:id="@+id/tile_breed_txt" />
-        <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:layout_weight="1"
-            android:id="@+id/tile_location_txt" />
+            android:id="@+id/tile_location_txt"
+            android:fontFamily="casual" />
     </LinearLayout></LinearLayout></LinearLayout>
 </LinearLayout>

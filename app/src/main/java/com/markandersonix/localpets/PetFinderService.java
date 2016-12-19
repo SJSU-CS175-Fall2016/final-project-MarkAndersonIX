@@ -1,9 +1,10 @@
 package com.markandersonix.localpets;
 
-import com.markandersonix.localpets.Models.Search.Pet;
+import com.markandersonix.localpets.Models.Breeds.BreedData;
+import com.markandersonix.localpets.Models.Breeds.Breeds;
+import com.markandersonix.localpets.Models.Get.Petfinder;
 import com.markandersonix.localpets.Models.Search.SearchData;
 
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -16,14 +17,6 @@ import retrofit2.http.QueryMap;
  */
 
 public interface PetFinderService {
-//    @GET("pet.find?key=8ed5a6a2883bd0e47fe636efe4b14821&format=json")
-//    Call<SearchData> getListings(
-//            @Query("animal") String type,
-//            @Query("breed") String breed,
-//            @Query("sex") String sex,
-//            @Query("size") String size,
-//            @Query("age") String age,
-//            @Query("location") String location    );
 
     @GET("pet.find?key=8ed5a6a2883bd0e47fe636efe4b14821&format=json")
     Call<SearchData> getListings(@QueryMap(encoded = true) Map<String,String> options);
@@ -32,6 +25,10 @@ public interface PetFinderService {
     Call<SearchData> getListings(@Query("location") String location);
 
     @GET("pet.get?key=8ed5a6a2883bd0e47fe636efe4b14821&format=json")
-    Call<Pet> getPet(@Query("id") String id);
+    Call<Petfinder> getPet(@Query("id") String id);
+
+    @GET("breed.list?key=8ed5a6a2883bd0e47fe636efe4b14821&format=json")
+    Call<BreedData> getBreeds(@Query("animal") String animal);
+
 
 }

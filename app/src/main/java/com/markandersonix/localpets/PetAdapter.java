@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.markandersonix.localpets.Models.Search.Pet;
 import com.squareup.picasso.Picasso;
@@ -58,10 +59,10 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder>{
         holder.breedText.setText("Breed: " + data.get(position).getBreeds().toString());
         holder.locationText.setText("Location: " + data.get(position).getContact().getCity().get$t());
         final Pet pet = data.get(position);
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(pet != null) {
+                if (pet != null) {
                     Intent intent = new Intent(view.getContext(), PetDetailActivity.class);
                     intent.putExtra("pet", pet); //<<<<Does this work?
                     view.getContext().startActivity(intent);
@@ -69,7 +70,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder>{
             }
         });
         Picasso.with(context).load(data.get(position).getMedia().getPhotos().getPhoto().get(2).get$t())
-                .resize(200,200)//holder.imageView.getWidth(), holder.imageView.getHeight())
+                .resize(200, 200)//holder.imageView.getWidth(), holder.imageView.getHeight())
                 .centerCrop().into(holder.imageView);
     }
 

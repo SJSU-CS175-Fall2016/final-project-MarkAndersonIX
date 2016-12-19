@@ -3,30 +3,12 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\Mark\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
-        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.7_adde4919916545920f24210d47e6ac09715802d3\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\design\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
         sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
         <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-24.2.1_43081af3112fd09d3b82a4a6b9459bf54edeae96\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="867dad63c33388ff8c7644b236579355036d075f">
-        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_51109d09945892c62474e64c1fa0ebf092e42350\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -57,30 +39,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Android\PetApp\libs\commons-lang3-3.5.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="6c6c702c89bfff3cd9e80b04d668c5e190d588c6">
-        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\2\commons-lang3-3.5_b8c53d95a55a146cfd52e8fb80b1ee5b4cf94fb9\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\Mark\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife-annotations\8.4.0\ea392375cf9ff59234a82e7928a204215ccc98cd\butterknife-annotations-8.4.0.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
         sha1="ea392375cf9ff59234a82e7928a204215ccc98cd">
         <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\butterknife-annotations-8.4.0_62d48ef9f314881c98dcf755c7d45203c994125d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
-        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-24.2.1_dbebead149fec3e0e5c794c0c8ef4071b9b6e190\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -106,17 +70,8 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="599429d0f1f511d8629338d228d69803043b14dd">
+        sha1="862e4acef8a6c5f6883f53c4c31f12ebeff392ec">
         <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_1f70a4b2f1d67f4d72fccd6b5f9af2f610b621b4\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
-        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_bd295c36879ea747c57270e2fb2768d926cea241\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -129,29 +84,11 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
-        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_e6f7353a48dffa472ed0cc4693ed49c3fc9e986d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
-        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_be6a92414e86f0963010b6cb1228dadfbde40c4f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Android\PetApp\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="d4f521744db88431ed65a704ff652b5a86d49960">
+        sha1="d4f6331991070275c7341b0e13a80beb81fc51d2">
         <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_b4157c42c3592ac579c7b1f53e686b6283c403e5\classes.dex" />
     </item>
     <item
@@ -162,33 +99,6 @@
         revision="24.0.3"
         sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
         <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\picasso-2.5.2_985a65d86df1cb89281f9bfda63ebcd7f9b06bf5\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
-        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_6d6a2978e44b49bc4292e873605a497ac09e9560\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
-        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.2.1_da5b75d6642aaf665da1c100b2c2d3771b1c62cf\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
-        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_fd12df7f834baa88d170c281569741e405dcb9e9\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -237,21 +147,111 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Mark\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.1.0\aa557d71ead91cbf26e0c316a0f593d168303309\converter-gson-2.1.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="aa557d71ead91cbf26e0c316a0f593d168303309">
-        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\converter-gson-2.1.0_5db1f7cdf9dd7d60c23705b3e9f56e2231f6e591\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
         sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
         <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_cf8097a40e1e03a6f8d3dcafa7366c131a49e1e7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Mark\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.7_adde4919916545920f24210d47e6ac09715802d3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_51109d09945892c62474e64c1fa0ebf092e42350\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Android\PetApp\libs\commons-lang3-3.5.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="6c6c702c89bfff3cd9e80b04d668c5e190d588c6">
+        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\2\commons-lang3-3.5_b8c53d95a55a146cfd52e8fb80b1ee5b4cf94fb9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-24.2.1_dbebead149fec3e0e5c794c0c8ef4071b9b6e190\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_bd295c36879ea747c57270e2fb2768d926cea241\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_e6f7353a48dffa472ed0cc4693ed49c3fc9e986d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_be6a92414e86f0963010b6cb1228dadfbde40c4f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_6d6a2978e44b49bc4292e873605a497ac09e9560\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.2.1_da5b75d6642aaf665da1c100b2c2d3771b1c62cf\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Android\PetApp\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_fd12df7f834baa88d170c281569741e405dcb9e9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Mark\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.1.0\aa557d71ead91cbf26e0c316a0f593d168303309\converter-gson-2.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="aa557d71ead91cbf26e0c316a0f593d168303309">
+        <dex dex="C:\Android\PetApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\converter-gson-2.1.0_5db1f7cdf9dd7d60c23705b3e9f56e2231f6e591\classes.dex" />
     </item>
     <item
         is-multidex="true"
