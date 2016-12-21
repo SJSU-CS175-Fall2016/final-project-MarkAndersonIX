@@ -1,13 +1,2 @@
-"# random-pics-MarkAndersonIX" 
-"# random-pics-MarkAndersonIX" 
-"# random-pics-MarkAndersonIX" 
-"# random-pics-MarkAndersonIX" 
-"# final-project-MarkAndersonIX" 
-"# final-project-MarkAndersonIX" 
-"# final-project-MarkAndersonIX" 
-"# final-project-MarkAndersonIX" 
-# final-project-MarkAndersonIX
-# final-project-MarkAndersonIX
 # CS175-Final-Project
-"# final-project-MarkAndersonIX" 
-"# final-project-MarkAndersonIX" 
+"LocalPets application.  Uses Retrofit, Butterknife, Picasso, and PetFinder API to display local listings for pet adoption."
